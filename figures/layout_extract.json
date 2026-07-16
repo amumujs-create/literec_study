@@ -1,0 +1,26 @@
+[
+  {
+    "pdf": "papers_to_add/03_NN/Rebuffi2017_Residual_Adapters.pdf",
+    "figure": 2,
+    "output": "rebuffi_adapter_fig2.png",
+    "bbox": [
+      118.2,
+      99.0,
+      473.6,
+      172.7
+    ],
+    "engine": "PP-DocLayoutV2"
+  },
+  {
+    "pdf": "papers_to_add/03_NN/Wang2021_Tent_Test_Time_Adaptation.pdf",
+    "figure": 3,
+    "output": "wang_tent_fig3.png",
+    "bbox": [
+      100.0,
+      107.7,
+      509.6,
+      246.1
+    ],
+    "engine": "PP-DocLayoutV2"
+  }
+]

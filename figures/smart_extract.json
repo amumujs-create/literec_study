@@ -1,0 +1,86 @@
+[
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Runje2023_Constrained_Monotonic_NN.pdf",
+    "figure": 1,
+    "output": "runje_monotonic_fig1.png",
+    "bbox": [
+      43.6,
+      62,
+      550.8,
+      207.4
+    ],
+    "caption": "Figure 1: Approximations of the cubic function f(x) = x3"
+  },
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Runje2023_Constrained_Monotonic_NN.pdf",
+    "figure": 3,
+    "output": "runje_monotonic_unit_fig3.png",
+    "bbox": [
+      123.4,
+      62,
+      465.4,
+      248.2
+    ],
+    "caption": "Figure 3: Proposed Monotonic Dense Unit or Constrained Monotone Fully Connected Layer"
+  },
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Runje2023_Constrained_Monotonic_NN.pdf",
+    "figure": 4,
+    "output": "runje_monotonic_arch_fig4.png",
+    "bbox": [
+      67.7,
+      62,
+      529.1,
+      201.6
+    ],
+    "caption": "Figure 4: Neural architecture type 1"
+  },
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Martius2016_Extrapolation_Learning_Equations_EQL.pdf",
+    "figure": 1,
+    "output": "eql_architecture_fig1.png",
+    "bbox": [
+      149.8,
+      62,
+      445.5,
+      174.0
+    ],
+    "caption": "Figure 1: Network architecture of the proposed Equation Learner (EQL) for 3 layers (L = 3) and one neuron per type (u = "
+  },
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Trask2018_Neural_Arithmetic_Logic_Units_NALU.pdf",
+    "figure": 2,
+    "output": "nalu_architecture_fig2.png",
+    "bbox": [
+      94.8,
+      65.0,
+      524.8,
+      223.8
+    ],
+    "caption": "Figure 2: The Neural Accumulator (NAC) is a linear transformation of its inputs. The transformation matrix is the elemen"
+  },
+  {
+    "pdf": "papers_to_add/02_OOD/Arjovsky2019_Invariant_Risk_Minimization.pdf",
+    "figure": 3,
+    "output": "irm_scm_fig3.png",
+    "bbox": [
+      127.1,
+      198.2,
+      457.6,
+      280.2
+    ],
+    "caption": "Figure 3: In our synthetic experiments, the task is to predict Y e from Xe = S(Ze"
+  },
+  {
+    "pdf": "extrapolation-papers/03_neural_network_extrapolation/Xu2021_How_Neural_Networks_Extrapolate.pdf",
+    "figure": 2,
+    "output": "xu_gnn_arch_fig2.png",
+    "bbox": [
+      101.4,
+      207.1,
+      510.6,
+      318.3
+    ],
+    "caption": "Figure 2: How GNNs extrapolate. Since MLPs can extrapolate well when learning linear functions, we hypothesize that GNNs"
+  }
+]

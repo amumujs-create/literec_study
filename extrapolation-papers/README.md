@@ -43,6 +43,7 @@ extrapolation-papers/
 | Wu2025_OOD_Time_Series_Survey.pdf | Wu et al. | 2025 | https://arxiv.org/abs/2503.13868 |
 | Ahuja2022_Invariance_IB_OOD.pdf | Ahuja et al. | 2022 | https://arxiv.org/abs/2106.06607 |
 | Yuan2022_OOD_Mechanics.pdf | Yuan et al. | 2022 | https://arxiv.org/abs/2206.14917 |
+| Krueger2021_Risk_Extrapolation_REx.pdf | Krueger et al. | 2021 | https://arxiv.org/abs/2003.00688 |
 
 ---
 
@@ -63,6 +64,9 @@ extrapolation-papers/
 | Fesser2023_Extrapolation_Failures_PINNs.pdf | Fesser et al. | 2023 | https://arxiv.org/abs/2306.09478 |
 | Zhu2022_Reliable_Extrapolation_DeepONet.pdf | Zhu et al. | 2022 | https://arxiv.org/abs/2212.06347 |
 | Hay2024_Function_Extrapolation_Manifolds.pdf | Hay & Sharon | 2024 | https://arxiv.org/abs/2405.10563 |
+| Shazeer2017_Sparsely_Gated_MoE.pdf | Shazeer et al. | 2017 | https://arxiv.org/abs/1701.06538 |
+| Wang2021_Tent_Test_Time_Adaptation.pdf | Wang et al. | 2021 | https://arxiv.org/abs/2006.10726 |
+| Rebuffi2017_Residual_Adapters.pdf | Rebuffi et al. | 2017 | https://arxiv.org/abs/1705.08045 |
 
 ---
 
@@ -88,4 +92,20 @@ extrapolation-papers/
 
 ---
 
-*총 36편 | 수집일: 2026-07-02*
+*총 40편+ | 수집일: 2026-07-02 · v4 추가: 2026-07-16*
+
+---
+
+## 발표자료
+
+| 파일 | 설명 |
+|------|------|
+| `../ppt_v3/외삽_50분_발표자료_v3.pptx` | v3 (37장) — Hull→OOD→알고리즘→N-CMAPSS |
+| `../ppt_v3/build_ppt_v3.py` | v3 PPT 재생성 스크립트 |
+| `../ppt_v3/outline_v3.md` | v3 outline |
+| **`../ppt_v3/outline_v4.md`** | **v4 최종 outline** (MoE+Adapter+TTA 하이브리드) |
+
+## 추가 논문
+
+- **2026-07-13** `../papers_to_add/` — IRM, GroupDRO, PINN, DeepONet, WILDS, TabPFN 등
+- **2026-07-16** MoE (Shazeer), Tent (Wang), Residual Adapters (Rebuffi), REx (Krueger)

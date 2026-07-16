@@ -1,0 +1,23 @@
+# Python / tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+**/venv/
+
+# Large local-only assets (GitHub 100MB limit)
+ppt_v3/.venv-figcrop/
+ppt_v3/models/
+ppt_v3/papers/   # PDF 복사본 (원문은 papers_to_add/ · extrapolation-papers/)
+ppt_v3/외삽_50분_발표자료_v4_full_ole.pptx
+extrapolation-papers/외삽_50분_발표자료_v4_full_ole.pptx
+figures/_debug_*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+figures/_preview/
+figures/_debug_pages/
+figures/_arch_tight/
