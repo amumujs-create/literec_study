@@ -16,7 +16,8 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent
-PROJ = ROOT.parent.parent  # 학교연구
+# ca-css-ncmapss repo (sibling under extra_study/)
+PROJ = ROOT.parent.parent / "ca-css-ncmapss"
 sys.path.insert(0, str(PROJ))
 
 OUT = ROOT / "_assets" / "case_v4"
@@ -798,6 +799,70 @@ def copy_existing() -> None:
             print("copied", dst)
 
 
+def fig_physics_vs_structure() -> None:
+    """λ_tra sweep + ablation — direction from structure, not physics loss."""
+    p_prior = PROJ / "results" / "v4_prior_evidence" / "v4_prior_evidence.json"
+    p_abl = PROJ / "results" / "v4_paper_ablation" / "v4_paper_ablation_report.md"
+    lam_labels, lam_rmse, lam_adh = [], [], []
+    if p_prior.exists():
+        rows = json.loads(p_prior.read_text())["lambda_rows"]
+        by_lam: dict[float, list[float]] = {}
+        adh: dict[float, list[float]] = {}
+        for r in rows:
+            if r.get("band") != "hard_extrap":
+                continue
+            lam = float(r["lambda_tra"])
+            by_lam.setdefault(lam, []).append(r["rmse"])
+            adh.setdefault(lam, []).append(r["adherence"]["frac_negative"])
+        for lam in sorted(by_lam):
+            lam_labels.append(f"λ={lam:g}")
+            lam_rmse.append(float(np.mean(by_lam[lam])))
+            lam_adh.append(float(np.mean(adh[lam])) * 100)
+    else:
+        lam_labels = ["λ=0", "λ=0.05", "λ=0.5"]
+        lam_rmse = [3.97, 3.88, 3.89]
+        lam_adh = [100, 100, 100]
+
+    abl_names = ["full", "λ=0", "no_phys", "no_iso"]
+    abl_rmse = [3.88, 3.97, 4.21, 4.37]
+    abl_colors = [BLUE, TEAL, CORAL, GRAY]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.5, 3.8))
+
+    x1 = np.arange(len(lam_labels))
+    bars1 = ax1.bar(x1, lam_rmse, color=TEAL, width=0.5, edgecolor="none")
+    ax1.set_xticks(x1)
+    ax1.set_xticklabels(lam_labels)
+    ax1.set_ylabel("hard RMSE ↓")
+    ax1.set_title("λ_tra 스윕 — RMSE 거의 무반응", fontsize=10, color=TEAL)
+    for b, v in zip(bars1, lam_rmse):
+        ax1.text(b.get_x() + b.get_width() / 2, v + 0.08, f"{v:.2f}",
+                 ha="center", fontsize=9, color=INK)
+    ax1.set_ylim(0, max(lam_rmse) * 1.25)
+    ax1_t = ax1.twinx()
+    ax1_t.plot(x1, lam_adh, "o--", color=CORAL, lw=1.8, markersize=7)
+    ax1_t.set_ylabel("ΔRUL<0 adherence (%)", color=CORAL)
+    ax1_t.set_ylim(95, 101)
+    ax1_t.tick_params(axis="y", labelcolor=CORAL)
+
+    x2 = np.arange(len(abl_names))
+    bars2 = ax2.bar(x2, abl_rmse, color=abl_colors, width=0.55, edgecolor="none")
+    ax2.set_xticks(x2)
+    ax2.set_xticklabels(abl_names, fontsize=9)
+    ax2.set_ylabel("hard RMSE ↓")
+    ax2.set_title("ablation — no_physics +0.33 · no_iso +0.49", fontsize=10, color=TEAL)
+    ax2.axhline(4.788, color=RED, ls="--", lw=1.0, alpha=0.7)
+    for b, v in zip(bars2, abl_rmse):
+        ax2.text(b.get_x() + b.get_width() / 2, v + 0.1, f"{v:.2f}",
+                 ha="center", fontsize=9, color=INK)
+    ax2.set_ylim(0, max(abl_rmse) * 1.2)
+
+    fig.text(0.5, 0.02,
+             "방향(ΔRUL<0)은 MonotoneLoadHead 구조 항등식 — physics loss는 fit 보조만",
+             ha="center", fontsize=9, color=SLATE)
+    save(fig, "fig_physics_vs_structure")
+
+
 def main():
     fig_dataset_overview()
     fig_split_matrix()
@@ -809,6 +874,7 @@ def main():
     # fig_main_rmse_r2()  — PPT hard-only; JSON은 load_main_dataset_metrics()로 유지
     load_main_dataset_metrics()
     fig_arch_ablation()
+    fig_physics_vs_structure()
     try:
         fig_training_curve()
     except Exception as e:

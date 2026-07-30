@@ -30,7 +30,7 @@ WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 SOFT = RGBColor(0xB8, 0xC4, 0xD0)
 ACCENT_DIM = RGBColor(0x24, 0x3A, 0x42)
 
-TOTAL = 4
+TOTAL = 5
 page = 0
 
 
@@ -266,16 +266,14 @@ def load_json_metrics(name: str) -> list[dict]:
 COMP_ROWS = [
     ["Inputs X_seq", "엔진·운용→센서", "window 시계열 입력"],
     ["OC norm · cycle", "스케일 차", "정규화·학습 안정"],
-    ["TRA Mask", "H ⊥ 부하", "TRA→0 지름길 차단"],
-    ["Linear 33→64", "—", "d_model 투영"],
+    ["TRA Mask", "H ⊥ 부하", "health 경로 TRA→0"],
     ["Transformer×2", "열화 시간 누적", "MHA 시계열 의존"],
     ["Health Head → H", "H > 0", "softplus 잠재 건강"],
-    ["Load Extract", "손상=운용 함수", "TRA,φ,T30,cycle"],
-    ["mono ∥ other", "TRA↑→손상↑", "단조 hard + MLP 보정"],
-    ["D = mono+other", "누적 손상", "병렬 합산"],
-    ["RUL = H−D", "수명=건강−손상", "분해 가정 고정"],
-    ["Isotonic", "cycle↑→RUL↓", "엔진별 시간 단조"],
-    ["Loss", "—", "L_RUL fit · 방향=구조"],
+    ["MonotoneLoadHead", "TRA↑→D↑", "∂RUL/∂TRA<0 **구조 항등식**"],
+    ["RUL = H − D", "건강−손상", "분해 가정 (disentangled)"],
+    ["Isotonic", "cycle↑→RUL↓", "엔진별 시간 단조 후처리"],
+    ["L_RUL", "—", "MSE · 라벨 fit (주 loss)"],
+    ["L_physics", "TRA Jacobian soft", "λ·L_phys — **보조** (구조와 중복)"],
 ]
 
 
@@ -286,7 +284,7 @@ def fmt_pm(mean: float, std: float, digits: int = 2) -> str:
 
 
 def build():
-    """Case deck — 4 slides: 문제 · 구조+의도 · 결과 · 검증."""
+    """Case deck — 5 slides: 문제 · 구조 · physics/구조 · 결과 · 검증."""
     global page
     page = 0
     prs = Presentation()
@@ -294,47 +292,68 @@ def build():
     prs.slide_height = H
 
     # 1 · 문제 — 시험(외삽) 구간만
-    s = slide(prs, "사례 1/4", "시험(외삽) 구간에서 터보팬 수명을 맞추는 문제",
+    s = slide(prs, "사례 1/5", "시험(외삽) 구간에서 터보팬 수명을 맞추는 문제",
               "N-CMAPSS · 처음 보는 엔진 + 고부하(TRA>q90)만 평가.")
     card_text(s, Inches(0.42), Inches(1.12), Inches(4.5), Inches(2.3), "다루는 문제",
               [
                   "항공 터보팬 남은 수명(RUL) 예측",
                   "N-CMAPSS — 엔진 9대, 센서 시계열",
                   "부하·스로틀(TRA)이 바뀌면 분포도 같이 바뀜",
-                  "라벨은 ‘몇 cycle 남았나’만 — 순간 부하와는 무관",
+                  "라벨은 ‘몇 cycle 남았나’ — 순간 TRA와 무관 (∂RUL/∂TRA=0)",
               ], TEAL, dense=True)
     card_text(s, Inches(0.42), Inches(3.55), Inches(4.5), Inches(2.5), "평가 구간 (시험·외삽)",
               [
                   "엔진 11·14·15 — 훈련에 없던 3대",
                   "TRA > q90 — 본편 hard와 같은 고부하 밴드",
-                  "새 엔진과 새 부하가 동시에 옴 (n≈159)",
-                  "여기서 TabPFN 4.8, LSTM 15 epoch는 16 전후",
+                  "새 엔진 + 새 부하 동시 (n≈159 windows)",
+                  "fair epoch: v4 e15 · LSTM/Trans e120 → TabPFN 4.8대",
               ], CORAL, dense=True)
     add_fig(s, "fig_tra_hard_split.png", Inches(5.05), Inches(1.1), width=Inches(7.85),
             caption="시험(외삽)만 — 엔진 11·14·15 · TRA > q90")
-    takeaway(s, "그림·수치는 훈련·검증이 아니라, 시험(외삽) 구간만을 말한다")
+    takeaway(s, "hard = unit×regime 결합 외삽 — 여기서만 headline 주장")
 
-    # 2 · 구조 + 구성요소 설계 의도 (한 장)
-    s = slide(prs, "사례 2/4", "CA-CSS v4 구조와 구성요소별 설계 의도",
-              "위: 블록 다이어그램 · 아래: 가정 → 설계 매핑.")
-    add_fig(s, "fig_v4_architecture.png", Inches(1.2), Inches(1.0), height=Inches(2.55),
-            caption="health ∥ damage → RUL=H−D · mono∥MLP · isotonic")
-    half = len(COMP_ROWS) // 2
-    add_table(s, Inches(0.42), Inches(3.78), Inches(6.15),
+    # 2 · 구조 + 설계 의도
+    s = slide(prs, "사례 2/5", "CA-CSS v4 구조 — 방향은 아키텍처에 내장",
+              "본편 S20 CMNN echo: loss가 아니라 구조가 prior.")
+    add_fig(s, "fig_v4_architecture.png", Inches(0.42), Inches(1.0), height=Inches(2.45),
+            caption="RUL=H−D · health TRA-blind · MonotoneLoadHead")
+    half = len(COMP_ROWS) // 2 + 1
+    add_table(s, Inches(0.42), Inches(3.62), Inches(6.15),
               ["구성요소", "가정", "설계 의도"],
               COMP_ROWS[:half],
-              col_widths=[Inches(1.35), Inches(1.85), Inches(2.95)],
-              row_h=0.24, body_size=8)
-    add_table(s, Inches(6.75), Inches(3.78), Inches(6.15),
+              col_widths=[Inches(1.45), Inches(1.75), Inches(2.95)],
+              row_h=0.22, body_size=7.5)
+    add_table(s, Inches(6.75), Inches(3.62), Inches(6.15),
               ["구성요소", "가정", "설계 의도"],
               COMP_ROWS[half:],
-              col_widths=[Inches(1.35), Inches(1.85), Inches(2.95)],
-              row_h=0.24, body_size=8)
-    takeaway(s, "가정을 블록 형태로 compile — fit은 L_RUL, 방향은 mask·head·iso",
-             sub="λ_tra=0에서도 방향 유지 (loss보다 구조가 prior)")
+              col_widths=[Inches(1.45), Inches(1.75), Inches(2.95)],
+              row_h=0.22, body_size=7.5)
+    takeaway(s, "부하→수명 방향은 MonotoneLoadHead 항등식 — TRA mask + RUL=H−D",
+             sub="∂RUL/∂TRA ≤ −softplus(w) < 0 (구조상 위반 불가)")
 
-    # 3 · 결과
-    s = slide(prs, "사례 3/4", "hard 구간에서 다른 모델과 비교하면",
+    # 3 · physics loss vs 구조 prior (핵심 수정)
+    s = slide(prs, "사례 3/5", "Physics loss vs 구조 prior — 무엇이 방향을 만드는가",
+              "PINN式 soft loss ≠ 여기서의 방향 메커니즘.")
+    add_fig(s, "fig_physics_vs_structure.png", Inches(0.42), Inches(1.05), width=Inches(12.5),
+            caption="λ_tra 스윕: RMSE·adherence 모두 무반응 · no_physics +0.33")
+    card_text(s, Inches(0.42), Inches(4.05), Inches(6.0), Inches(2.15), "L = L_RUL + λ·L_physics",
+              [
+                  "L_physics: TRA Jacobian·단조 hinge (soft constraint)",
+                  "no_physics: RMSE +0.33 — fit 보조 역할",
+                  "λ_tra 0 / 0.05 / 0.5: RMSE ±0.09 · adherence 100%",
+              ], TEAL, dense=True)
+    card_text(s, Inches(6.55), Inches(4.05), Inches(6.35), Inches(2.15), "구조 ablation → 방향 인과",
+              [
+                  "full: RMSE 3.88 · ΔRUL<0 100%",
+                  "free_load: RMSE 4.24 · adherence 0%",
+                  "mono head 제거 = worst seed 6.1",
+                  "레버 = MonotoneLoadHead, not λ_tra",
+              ], CORAL, dense=True)
+    takeaway(s, "physics loss는 fit 보조 — counterfactual 방향은 구조 prior",
+             sub="‘물리 법칙 준수’ ✗ · ‘도메인 prior + OOD RMSE’ ✓")
+
+    # 4 · 결과
+    s = slide(prs, "사례 4/5", "hard 구간에서 다른 모델과 비교하면",
               "모델마다 학습 epoch 맞춘 공정 비교.")
     add_fig(s, "fig_baseline_fair_hard.png", Inches(0.42), Inches(1.0), width=Inches(8.3),
             caption="각 모델에 맞게 epoch 조정 후 hard 구간 RMSE·R²")
@@ -363,34 +382,35 @@ def build():
               col_widths=[Inches(1.15), Inches(1.05), Inches(0.85)])
     card_text(s, Inches(8.85), Inches(3.55), Inches(4.05), Inches(2.5), "읽는 포인트",
               [
-                  "LSTM도 epoch 늘리면 4.8까지 올라옴",
-                  "그래도 v4가 3.4대 · 설명력 R² 0.97",
-                  "10번 반복 실험에서 TabPFN보다 유의하게 좋음",
-                  "외삽 구간에서 ‘부하 올리면 수명↓’ 100% 유지",
+                  "LSTM/Trans도 fair epoch면 4.8~5.0",
+                  "v4+iso 3.43±0.73 · R² 0.97 (10-seed)",
+                  "p=0.00017 vs TabPFN — hard만 차별화",
+                  "C-MAPSS e120 ≈ Transformer (headline ✗)",
               ], CORAL, dense=True)
-    takeaway(s, "공정하게 맞춰도 v4만 TabPFN·Transformer·LSTM을 한꺼번에 이긴다")
+    takeaway(s, "결합 hard만 v4 유일 우위 — C-MAPSS 단일축은 수렴하면 비슷")
 
-    # 4 · 검증 · 요약
-    s = slide(prs, "사례 4/4", "무엇까지 말할 수 있고, 한 줄로 정리하면",
+    # 5 · 검증 · 요약
+    s = slide(prs, "사례 5/5", "무엇까지 말할 수 있고, 한 줄로 정리하면",
               "주장 범위를 좁히고, 본편 메시지로 회수.")
     card_text(s, Inches(0.42), Inches(1.1), Inches(5.9), Inches(3.2), "말해도 되는 것",
               [
-                  "hard 구간 오차·R²가 baseline보다 낫다",
-                  "설계한 부하 방향성이 외삽에서도 유지된다",
-                  "모델마다 epoch 맞춘 비교 · 같은 후처리",
-                  "본편 외삽 체크리스트 4항 충족",
+                  "hard extrap RMSE ↓ (10-seed, p=0.00017)",
+                  "구조 prior → model-input ΔRUL<0 100%",
+                  "MonotoneLoadHead ablation으로 인과 확인",
+                  "본편 S30 체크 4항 충족",
               ], TEAL, dense=True)
     card_text(s, Inches(6.5), Inches(1.1), Inches(6.4), Inches(3.2), "말하지 않는 것",
               [
-                  "‘데이터가 부하↑수명↓을 증명했다’",
-                  "‘특정 loss 덕분에 방향이 생겼다’",
-                  "‘라벨만 보면 물리 법칙이 입증됐다’",
+                  "‘데이터가 TRA↑⇒RUL↓ 증명’ (r≈0, ∂RUL/∂TRA=0)",
+                  "‘λ_tra·physics loss가 방향 생성’ (λ=0도 100%)",
+                  "‘PINN/PDE 물리 법칙 준수’",
+                  "‘C-MAPSS 전 split SOTA’",
               ], CORAL, dense=True)
     rows = [
-        ("문제", "N-CMAPSS · 처음 보는 엔진 + 높은 부하에서 수명 예측"),
-        ("가정", "시간 단조 · 고부하 열화 · 건강−손상 분리"),
-        ("방법", "부하 단조 head · 건강 경로에서 부하 제거 · 단조 보정"),
-        ("결과", "RMSE 3.4 · R² 0.97 — TabPFN 4.8보다 낮음"),
+        ("문제", "N-CMAPSS hard — unit×TRA 밖 (결합 외삽)"),
+        ("가정", "counterfactual 부하 prior → MonotoneLoadHead 구조"),
+        ("loss", "L_RUL fit + L_physics 보조 — 방향은 구조"),
+        ("결과", "RMSE 3.43 vs TabPFN 4.79 · worst-seed 방어"),
     ]
     y0 = Inches(4.45)
     for i, (k, v) in enumerate(rows):
@@ -399,7 +419,8 @@ def build():
                  k, size=11, bold=True, color=TEAL)
         add_text(s.shapes.add_textbox(Inches(2.1), y0 + Inches(i * 0.48) + Inches(0.06), Inches(10.5), Inches(0.32)),
                  v, size=11, color=SOFT)
-    takeaway(s, "밖을 버티는 건 데이터가 아니라 가정 — 그 가정을 구조에 넣고, hard에서 숫자로 확인했다")
+    takeaway(s, "밖을 버티는 건 데이터가 아니라 구조 prior — physics loss는 fit 보조",
+             sub="본편 echo: 가정을 구조에 넣고, hard에서 검증")
 
     prs.save(str(OUT))
     print(f"Saved {OUT} ({page} slides)")
