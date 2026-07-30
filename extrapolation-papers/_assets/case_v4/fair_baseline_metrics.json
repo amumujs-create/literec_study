@@ -1,0 +1,254 @@
+[
+  {
+    "dataset": "ncmapss_hard",
+    "label": "N-CMAPSS hard \u2605",
+    "models": [
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "v4_iso",
+        "label": "v4+iso",
+        "color": "#2563eb",
+        "epoch": 15,
+        "note": "10-seed e15",
+        "rmse": 3.4336444267016986,
+        "rmse_std": 0.7296555415375167,
+        "r2": 0.9663736641407012,
+        "r2_std": 0.012679563302038352,
+        "n_seed": 10
+      },
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "transformer_iso",
+        "label": "Transformer",
+        "color": "#3DD6C6",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 4.989789581427957,
+        "rmse_std": 0.4620692422433834,
+        "r2": 0.9312209486961365,
+        "r2_std": 0.01064325860314563,
+        "n_seed": 3
+      },
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "tabpfn",
+        "label": "TabPFN",
+        "color": "#dc2626",
+        "rmse": 4.788,
+        "rmse_std": 0.0,
+        "r2": 0.9365578793523639,
+        "r2_std": 0.0,
+        "epoch": "ref",
+        "n_seed": 1,
+        "note": "in-context ref"
+      },
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "xgb_iso",
+        "label": "GBM+iso",
+        "color": "#6E7C8C",
+        "epoch": 15,
+        "note": "10-seed e15",
+        "rmse": 5.735820320055668,
+        "rmse_std": 0.46462232810090853,
+        "r2": 0.9081231415271759,
+        "r2_std": 0.015290737191074181,
+        "n_seed": 10
+      },
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "lstm_iso",
+        "label": "LSTM+iso",
+        "color": "#94a3b8",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 4.793287672355734,
+        "rmse_std": 0.5476262788282331,
+        "r2": 0.9363869627316793,
+        "r2_std": 0.01252703373083181,
+        "n_seed": 3
+      },
+      {
+        "dataset": "ncmapss_hard",
+        "model_key": "gru_iso",
+        "label": "GRU+iso",
+        "color": "#64748b",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 4.977305722467547,
+        "rmse_std": 0.6537471692191564,
+        "r2": 0.9312384327252706,
+        "r2_std": 0.015926597559889486,
+        "n_seed": 3
+      }
+    ]
+  },
+  {
+    "dataset": "cmapss_fd002",
+    "label": "C-MAPSS FD002",
+    "models": [
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "v4_iso",
+        "label": "v4+iso",
+        "color": "#2563eb",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 4.14776769741198,
+        "rmse_std": 0.144532134861601,
+        "r2": 0.9902384224882096,
+        "r2_std": 0.0006797676044361574,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "transformer_iso",
+        "label": "Transformer",
+        "color": "#3DD6C6",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 4.068682999087636,
+        "rmse_std": 0.059091364246097594,
+        "r2": 0.9906165401140848,
+        "r2_std": 0.00027385906237653,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "tabpfn",
+        "label": "TabPFN",
+        "color": "#dc2626",
+        "rmse": 16.3,
+        "rmse_std": 0.0,
+        "r2": 0.8494297027963996,
+        "r2_std": 0.0,
+        "epoch": "ref",
+        "n_seed": 1,
+        "note": "in-context ref"
+      },
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "xgb_iso",
+        "label": "GBM+iso",
+        "color": "#6E7C8C",
+        "epoch": 15,
+        "note": "10-seed e15",
+        "rmse": 14.24760175902559,
+        "rmse_std": 1.7763568394002505e-15,
+        "r2": 0.8849602937698364,
+        "r2_std": 0.0,
+        "n_seed": 10
+      },
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "lstm_iso",
+        "label": "LSTM+iso",
+        "color": "#94a3b8",
+        "epoch": 60,
+        "note": "3-seed e60",
+        "rmse": 6.823851459298979,
+        "rmse_std": 0.20290964653172303,
+        "r2": 0.9735876520474752,
+        "r2_std": 0.00155880238156532,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd002",
+        "model_key": "gru_iso",
+        "label": "GRU+iso",
+        "color": "#64748b",
+        "epoch": 60,
+        "note": "3-seed e60",
+        "rmse": 7.955320634816611,
+        "rmse_std": 1.4922192885778371,
+        "r2": 0.9628723661104838,
+        "r2_std": 0.014181161209500623,
+        "n_seed": 3
+      }
+    ]
+  },
+  {
+    "dataset": "cmapss_fd004",
+    "label": "C-MAPSS FD004",
+    "models": [
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "v4_iso",
+        "label": "v4+iso",
+        "color": "#2563eb",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 3.8905199736135754,
+        "rmse_std": 0.1853199380597507,
+        "r2": 0.9913098775278398,
+        "r2_std": 0.0008323268071318097,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "transformer_iso",
+        "label": "Transformer",
+        "color": "#3DD6C6",
+        "epoch": 120,
+        "note": "3-seed e120",
+        "rmse": 3.745843971071005,
+        "rmse_std": 0.11219946589819477,
+        "r2": 0.9919552206993103,
+        "r2_std": 0.00047682473295632995,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "tabpfn",
+        "label": "TabPFN",
+        "color": "#dc2626",
+        "rmse": 17.156,
+        "rmse_std": 0.0,
+        "r2": 0.8313996824487732,
+        "r2_std": 0.0,
+        "epoch": "ref",
+        "n_seed": 1,
+        "note": "in-context ref"
+      },
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "xgb_iso",
+        "label": "GBM+iso",
+        "color": "#6E7C8C",
+        "epoch": 15,
+        "note": "10-seed e15",
+        "rmse": 13.183203119212791,
+        "rmse_std": 0.0,
+        "r2": 0.9004437923431396,
+        "r2_std": 0.0,
+        "n_seed": 10
+      },
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "lstm_iso",
+        "label": "LSTM+iso",
+        "color": "#94a3b8",
+        "epoch": 60,
+        "note": "3-seed e60",
+        "rmse": 7.225620752292772,
+        "rmse_std": 0.29135314874689344,
+        "r2": 0.9700441360473633,
+        "r2_std": 0.002426346312123244,
+        "n_seed": 3
+      },
+      {
+        "dataset": "cmapss_fd004",
+        "model_key": "gru_iso",
+        "label": "GRU+iso",
+        "color": "#64748b",
+        "epoch": 60,
+        "note": "3-seed e60",
+        "rmse": 6.13547391799618,
+        "rmse_std": 0.14167530713944734,
+        "r2": 0.9784248471260071,
+        "r2_std": 0.0009976717613598347,
+        "n_seed": 3
+      }
+    ]
+  }
+]

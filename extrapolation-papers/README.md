@@ -1,6 +1,36 @@
 # Extrapolation Papers
 
-외삽(Extrapolation) 관련 논문 모음 — 40분 발표자료 기반 문헌 정리
+외삽(Extrapolation) 관련 논문 모음 — **50분 발표** 기반 문헌 정리
+
+원본 레포: https://github.com/amumujs-create/literec_study
+
+---
+
+## 발표자료 (권장)
+
+> **고정본: `외삽_50분_발표자료_v4.pptx`** — 이후 v5 이상 생성하지 않음. 수정 필요 시 이 파일만 직접 고친다.
+
+
+| 파일 | 설명 |
+|------|------|
+| **`외삽_50분_발표자료_v4.pptx`** | **고정본** · PDF 버튼 46개 · `paper_pdfs/` 상대링크 |
+| **`paper_pdfs/`** | **전체 PDF 39편 모음** (여기만 열어봐도 됨) |
+| **`INDEX.md`** | 목록·분류 한눈에 |
+| `열기.command` | 더블클릭 → PPT + paper_pdfs + INDEX 열기 |
+| `외삽_완전정복_학습노트.pdf` | 복습 노트 |
+| `_assets/paper_figs/` | 논문 Figure 크롭 |
+| `01_`~`05_/` | 주제별 원본 |
+
+### 50분 타임라인
+
+| Part | 내용 | 시간 |
+|------|------|------|
+| 1 | 기초 이론 (Hull · Richardson · UQ) | 11분 |
+| 2 | OOD (IRM · DomainBed · 시계열) | 11분 |
+| 3 | 신경망 외삽 (Xu · EQL · NALU · Mono · PINN) | 14분 |
+| 4 | N-CMAPSS APEX-Guard / strict_late | 10분 |
+| 5 | 동향 · 필독 · 적용 | 4분 |
+| — | Q&A | 별도 |
 
 ---
 
@@ -12,7 +42,8 @@ extrapolation-papers/
 ├── 02_OOD_generalization/           # OOD (Out-of-Distribution) 일반화
 ├── 03_neural_network_extrapolation/ # 딥러닝/신경망 외삽 방법론
 ├── 04_battery_engineering/          # 배터리·공학 응용 (RUL 예측)
-└── 05_uncertainty_quantification/   # 불확실성 정량화 + Bayesian 접근
+├── 05_uncertainty_quantification/   # 불확실성 정량화 + Bayesian 접근
+└── _assets/                         # v3 발표용 그림
 ```
 
 ---
