@@ -148,10 +148,20 @@ def fig_poly_extrap():
 
 
 def fig_identifiability():
+    """Both hypotheses pass through OBSERVED points; diverge only out of support."""
     x = np.linspace(0, 3.2, 200)
+    x0 = 1.05
+    # Shared in-support behavior (observations lie on this line)
     linear = 0.55 * x + 0.4
-    exp = 0.4 * (np.exp(0.55 * x) - 1) + 0.4
-    # match early
+    y0 = 0.55 * x0 + 0.4
+    slope = 0.55
+    # C1-matched exponential continuation past support (same value & slope at x0)
+    b = 0.95
+    exp = np.where(
+        x <= x0,
+        linear,
+        y0 + (slope / b) * (np.exp(b * (x - x0)) - 1.0),
+    )
     x_obs = np.linspace(0.2, 1.0, 6)
     y_obs = 0.55 * x_obs + 0.4
 
@@ -159,8 +169,8 @@ def fig_identifiability():
     _caption(fig, "Figure. Identifiability failure under finite support",
              "Locally equivalent models diverge out of support")
     _style_ax(ax)
-    ax.axvspan(0, 1.05, color=TEAL, alpha=0.10)
-    ax.axvline(1.05, color=LINE_DIM, ls="--", lw=0.9)
+    ax.axvspan(0, x0, color=TEAL, alpha=0.10)
+    ax.axvline(x0, color=LINE_DIM, ls="--", lw=0.9)
     ax.text(0.35, 3.55, "OBSERVED", color=TEAL, fontsize=8, fontweight="bold")
     ax.text(1.9, 3.55, "UNIDENTIFIED", color=AMBER, fontsize=8, fontweight="bold")
     _glow_line(ax, x, linear, CYAN, lw=2.0, label="linear hypothesis")
