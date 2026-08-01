@@ -220,65 +220,65 @@ def clear_slide(slide):
 def build_summary(slide):
     content_header(slide, "마무리", "**회귀 extrap** — 오늘 정리")
 
-    rect(slide, Inches(0.45), Inches(1.15), Inches(12.43), Inches(0.82), NAVY, TEAL, radius=0.05)
-    hero = slide.shapes.add_textbox(Inches(0.65), Inches(1.22), Inches(12.0), Inches(0.72))
+    rect(slide, Inches(0.45), Inches(1.12), Inches(12.43), Inches(0.68), NAVY, TEAL, radius=0.05)
+    hero = slide.shapes.add_textbox(Inches(0.65), Inches(1.18), Inches(12.0), Inches(0.58))
     hero_tf = add_text(
         hero,
         "train **밖**은 **데이터**가 아니라 **가정**이 지탱한다",
-        size=21,
+        size=20,
         bold=True,
         color=WHITE,
         align=PP_ALIGN.CENTER,
     )
     add_para(
         hero_tf,
-        "“외삽 되나?” → **가정**이 맞고 · **밖에서 시험**했는가?",
-        size=13,
+        "“외삽 되나?” → **가정** 맞음 · **밖 holdout** 시험",
+        size=12,
         color=SOFT,
         align=PP_ALIGN.CENTER,
-        space_before=5,
+        space_before=4,
     )
 
     story = [
-        ("① 1부 · 정의", ["외삽 = hull **밖** 예측", "연속 회귀 · 분류 DG와 다름"], TEAL),
-        ("② 2부 · 실패", ["데이터만으론 밖 **모양** 못 정함", "NN도 밖에선 직선 · 불확실성↑"], CORAL),
-        ("③ 3부 · 대응", ["아는 만큼 **가정**을 넣는다", "식 · 방향 · 물리 · 모르면 UQ"], TEAL),
-        ("④ 실무 · 검증", ["**밖 holdout**으로 확인 후 배포", "못 믿으면 **예측 안 함**(기권)"], CORAL),
+        ("① 정의", "hull **밖** = 외삽", TEAL),
+        ("② 실패", "데이터만으론 밖 **모양** 불가", CORAL),
+        ("③ 대응", "**가정** — 식·방향·UQ", TEAL),
+        ("④ 검증", "밖 시험 · **기권**", CORAL),
     ]
-    cw = Inches(6.08)
-    ch = Inches(1.18)
-    cgx = Inches(0.14)
-    cgy = Inches(0.12)
-    sy = Inches(2.12)
-    for i, (title, bullets, accent) in enumerate(story):
-        col, row = i % 2, i // 2
-        x = Inches(0.45 + col * (cw + cgx))
-        y = sy + row * (ch + cgy)
-        card_text(slide, x, y, cw, ch, title, bullets, accent, dense=True)
+    sw = Inches(3.02)
+    sg = Inches(0.10)
+    sh = Inches(0.92)
+    sy = Inches(1.92)
+    for i, (title, line, accent) in enumerate(story):
+        x = Inches(0.45 + i * (sw + sg))
+        card_text(slide, x, sy, sw, sh, title, [line], accent, dense=True)
+        if i < 3:
+            arr = slide.shapes.add_textbox(x + sw + Inches(0.01), Inches(2.28), Inches(0.10), Inches(0.22))
+            add_text(arr, "›", size=13, bold=True, color=MUTED, align=PP_ALIGN.CENTER)
 
-    lbl = slide.shapes.add_textbox(Inches(0.45), Inches(4.72), Inches(2.5), Inches(0.26))
+    lbl = slide.shapes.add_textbox(Inches(0.45), Inches(3.02), Inches(2.5), Inches(0.24))
     add_text(lbl, "필독 3편", size=11, bold=True, color=TEAL)
 
     trio = [
-        ("진단", "Xu 2021", "ReLU·직선화 — **왜** 밖에서 깨지나", "xu", CORAL),
-        ("처방", "Runje 2023", "CMNN — **방향** 가정을 구조에", "runje", TEAL),
-        ("검증", "Bartley 2019", "hull·고차원 — **밖**인지 판정", "bartley", TEAL),
+        ("진단", "Xu 2021", "ReLU·직선화", "xu", CORAL),
+        ("처방", "Runje 2023", "CMNN·방향 가정", "runje", TEAL),
+        ("검증", "Bartley 2019", "hull·밖 판정", "bartley", TEAL),
     ]
-    tw = Inches(3.98)
-    tg = Inches(0.14)
-    ty = Inches(5.02)
-    th = Inches(1.08)
+    tw = Inches(4.03)
+    tg = Inches(0.12)
+    ty = Inches(3.28)
+    th = Inches(1.18)
     for i, (role, cite, desc, key, accent) in enumerate(trio):
         x = Inches(0.45 + i * (tw + tg))
         card_text(slide, x, ty, tw, th, f"{role} · {cite}", [desc], accent, dense=True)
-        pdf_btn(slide, key, x + tw - Inches(1.08), ty + Inches(0.72), w=Inches(0.92), h=Inches(0.30), label="PDF")
+        pdf_btn(slide, key, x + (tw - Inches(0.92)) / 2, ty + Inches(0.82), w=Inches(0.92), h=Inches(0.28), label="PDF")
 
     footer(slide, SLIDE_IDX + 1, TOTAL)
-    takeaway(slide, "가정 맞추기 · **밖에서 시험** · UQ/기권", "Xu · Runje · Bartley", y=Inches(6.28))
+    takeaway(slide, "가정 맞추기 · **밖에서 시험** · UQ/기권", "Xu · Runje · Bartley", y=Inches(6.32))
 
     note = (
         "[1.5분]\n"
-        "관통 문장(hero) → 2×2 스토리(①~④) → 필독 3편.\n"
+        "관통 문장 → ①~④ 한 줄씩 → 필독 3편.\n"
         "더 읽기: Pfister·Fesser·Zhu·Li. Q&A로."
     )
     slide.notes_slide.notes_text_frame.text = note
