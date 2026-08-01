@@ -485,15 +485,18 @@ card_text(
     s, Inches(0.35), Inches(4.55), Inches(7.45), Inches(1.55),
     "④ 그림 해석",
     [
-        "훈련점(●) 동일 · x>2 밖에서 가정별 예측이 **서로 다름**",
-        "데이터는 같고 가정만 다름 = 오늘 발표 출발점",
+        "훈련 범위 — **하나로 보임** (어떤 가정인지 데이터만으론 불명)",
+        "x>2 밖 — 가정 A·B·C **연장**마다 예측 전부 다름",
+        "≠ 세 모델을 동시에 fit · = 같은 데이터·다른 prior",
     ],
     CORAL, dense=True,
 )
 footer(s, P(), TOTAL)
 note(s, "[2분] ★ 용어 장 — 반드시 천천히.\n"
-     "대본: '가정'이 오늘 키워드입니다. 왼쪽 그림 — 훈련점(●)은 전부 같습니다. "
-     "가정 A(선형)·B(지수)·C(비선형)만 바꾸면 x>2 밖에서 곡선이 완전히 달라집니다. "
+     "대본: '가정'이 오늘 키워드입니다. 왼쪽 그림 — 훈련점(●)은 같습니다. "
+     "훈련 범위 안에서는 **하나의 적합**처럼 보이고, 데이터만으로는 선형·지수·비선형 중 "
+     "어느 가정이 맞는지 고를 수 없습니다. x=2 밖으로 **가정(prior)을 연장**하는 순간 "
+     "A·B·C 예측이 완전히 갈립니다. 세 모델을 동시에 학습한 그림이 **아닙니다**. "
      "오른쪽 ① 정의, ② 왜 필요(Pfister), ③ 주입 위치. 아래 ④ 그림 해석. "
      "이후 '가정을 넣는다'는 이 뜻으로만 쓰겠습니다.")
 takeaway(s, "가정 = 밖에서의 함수 거동을 미리 제약하는 사전 지식",
@@ -1504,50 +1507,69 @@ note(s, "[2분]\n"
 takeaway(s, "범위 확인 → 방법 선택 → **밖에서 검증** → 배포 또는 기권",
          "시험 데이터 없으면 **예측하지 않음**", y=_CY2 + Inches(1.38))
 
-# ── S26 마무리 — 스토리 4칸 + 필독 칩 ──
+# ── S26 마무리 — 2×2 스토리 + 필독 3칸 ──
 s = blank()
 content_header(s, "마무리", "**회귀 extrap** — 오늘 정리")
-box = rect(s, Inches(0.45), Inches(1.12), Inches(12.43), Inches(0.82), NAVY, TEAL, radius=0.05)
-t = s.shapes.add_textbox(Inches(0.65), Inches(1.24), Inches(12.0), Inches(0.58))
-add_text(t, "밖을 지탱하는 것은 데이터가 아니라 **가정**", size=22, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+
+rect(s, Inches(0.45), Inches(1.15), Inches(12.43), Inches(0.82), NAVY, TEAL, radius=0.05)
+hero = s.shapes.add_textbox(Inches(0.65), Inches(1.22), Inches(12.0), Inches(0.72))
+hero_tf = add_text(
+    hero,
+    "train **밖**은 **데이터**가 아니라 **가정**이 지탱한다",
+    size=21,
+    bold=True,
+    color=WHITE,
+    align=PP_ALIGN.CENTER,
+)
+add_para(
+    hero_tf,
+    "“외삽 되나?” → **가정**이 맞고 · **밖에서 시험**했는가?",
+    size=13,
+    color=SOFT,
+    align=PP_ALIGN.CENTER,
+    space_before=5,
+)
 
 _story = [
-    ("1부 · 정의", "외삽 = 훈련 범위(hull) **밖**을 예측", "연속값 회귀 · 분류 DG와 다름", TEAL),
-    ("2부 · 실패", "데이터만으론 밖의 모양을 **정할 수 없다**", "NN도 밖에선 직선 · 불확실성↑", CORAL),
-    ("3부 · 대응", "아는 지식만큼 **가정을 넣는다**", "식 · 방향 · 물리 · 모름(UQ)", TEAL),
-    ("실무 · 검증", "밖 시험으로 **확인**하고 배포", "못 믿으면 **예측하지 않음**(기권)", CORAL),
+    ("① 1부 · 정의", ["외삽 = hull **밖** 예측", "연속 회귀 · 분류 DG와 다름"], TEAL),
+    ("② 2부 · 실패", ["데이터만으론 밖 **모양** 못 정함", "NN도 밖에선 직선 · 불확실성↑"], CORAL),
+    ("③ 3부 · 대응", ["아는 만큼 **가정**을 넣는다", "식 · 방향 · 물리 · 모르면 UQ"], TEAL),
+    ("④ 실무 · 검증", ["**밖 holdout**으로 확인 후 배포", "못 믿으면 **예측 안 함**(기권)"], CORAL),
 ]
-_cw3 = Inches(2.98)
-_cg3 = Inches(0.14)
-for i, (title, line1, line2, accent) in enumerate(_story):
-    x = Inches(0.35 + i * (_cw3 + _cg3))
-    card_text(s, x, Inches(2.08), _cw3, Inches(1.42), title, [line1, line2], accent, dense=True)
-    if i < 3:
-        arr = s.shapes.add_textbox(x + _cw3 + Inches(0.02), Inches(2.62), Inches(0.12), Inches(0.30))
-        add_text(arr, "→", size=14, bold=True, color=MUTED, align=PP_ALIGN.CENTER)
+_cw4 = Inches(6.08)
+_ch4 = Inches(1.18)
+_cgx4 = Inches(0.14)
+_cgy4 = Inches(0.12)
+_sy4 = Inches(2.12)
+for i, (title, bullets, accent) in enumerate(_story):
+    col, row = i % 2, i // 2
+    x = Inches(0.45 + col * (_cw4 + _cgx4))
+    y = _sy4 + row * (_ch4 + _cgy4)
+    card_text(s, x, y, _cw4, _ch4, title, bullets, accent, dense=True)
 
-box2 = rect(s, Inches(0.45), Inches(3.62), Inches(12.43), Inches(0.58), ACCENT_DIM, LINE, radius=0.04)
-t2 = s.shapes.add_textbox(Inches(0.65), Inches(3.70), Inches(12.0), Inches(0.42))
-add_text(t2, "“외삽 되나?”  →  “**가정**이 맞고, **밖에서 시험**했나?”", size=15, bold=True, color=INK, align=PP_ALIGN.CENTER)
+_lbl = s.shapes.add_textbox(Inches(0.45), Inches(4.72), Inches(2.5), Inches(0.26))
+add_text(_lbl, "필독 3편", size=11, bold=True, color=TEAL)
 
-_reads = [
-    ("진단 · Xu 2021", "xu", CORAL),
-    ("처방 · Runje 2023", "runje", TEAL),
-    ("검증 · Bartley 2019", "bartley", TEAL),
+_trio = [
+    ("진단", "Xu 2021", "ReLU·직선화 — **왜** 밖에서 깨지나", "xu", CORAL),
+    ("처방", "Runje 2023", "CMNN — **방향** 가정을 구조에", "runje", TEAL),
+    ("검증", "Bartley 2019", "hull·고차원 — **밖**인지 판정", "bartley", TEAL),
 ]
-for i, (label, key, c) in enumerate(_reads):
-    x = Inches(0.45 + i * 4.2)
-    chip = rect(s, x, Inches(4.38), Inches(3.55), Inches(0.48), CARD, c, radius=0.05)
-    tb = s.shapes.add_textbox(x + Inches(0.18), Inches(4.48), Inches(2.2), Inches(0.30))
-    add_text(tb, label, size=11, bold=True, color=INK)
-    pdf_btn(s, key, x + Inches(2.45), Inches(4.44), w=Inches(0.95), h=Inches(0.36), label="PDF")
+_tw4 = Inches(3.98)
+_tg4 = Inches(0.14)
+_ty4 = Inches(5.02)
+_th4 = Inches(1.08)
+for i, (role, cite, desc, key, accent) in enumerate(_trio):
+    x = Inches(0.45 + i * (_tw4 + _tg4))
+    card_text(s, x, _ty4, _tw4, _th4, f"{role} · {cite}", [desc], accent, dense=True)
+    pdf_btn(s, key, x + _tw4 - Inches(1.08), _ty4 + Inches(0.72), w=Inches(0.92), h=Inches(0.30), label="PDF")
 
 footer(s, P(), TOTAL)
 note(s, "[1.5분]\n"
-     "관통 문장 → 4파트 스토리(화살표) → 질문 리프레임 → 필독 3칩.\n"
+     "관통 문장(hero) → 2×2 스토리(①~④) → 필독 3편.\n"
      "더 읽기: Pfister·Fesser·Zhu·Li. Q&A로.")
-takeaway(s, "가정 맞추고 · **밖에서 시험** · UQ/기권",
-         "Xu · Runje · Bartley", y=Inches(5.05))
+takeaway(s, "가정 맞추기 · **밖에서 시험** · UQ/기권",
+         "Xu · Runje · Bartley", y=Inches(6.28))
 
 # ── S27 Q&A / 참고문헌 ──
 s = blank()
