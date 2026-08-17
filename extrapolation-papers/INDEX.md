@@ -15,7 +15,22 @@
 
 ---
 
-## paper_pdfs/ 전체 (39)
+## 회귀 쪽으로 이은 추가 문헌 (2026-08-17)
+
+기존 조사 **01 → 05** 순서를 유지하고, 분류·DG가 아니라 **연속 \(y\) 회귀**만 보강.  
+자세한 연결·읽는 순서: [`회귀_외삽_추가문헌.md`](회귀_외삽_추가문헌.md)
+
+| 폴더 | 신규 PDF | 역할 |
+|------|----------|------|
+| 01 | King 2006 · Balestriero 2021 · Engression 2024 · Progression 2024 | hull 원전 · 고차원 외삽 · 회귀 가정 |
+| 02 | Sugiyama 2007 · Anchor Regression 2021 | covariate shift · 회귀 OOD (분류 DG 아님) |
+| 03 | Sahoo 2018 EQL÷ · Rahaman 2019 · SINDy 2016 · FNO 2021 | 수식·주파수·연산자 |
+| 04 | Severson 2019 · Attia 2021 · Arias Chao 2021 | 배터리 원전 · N-CMAPSS 데이터셋 |
+| 05 | Gal 2016 · Deep Ensembles · Kendall 2017 · Kuleshov 2018 · CQR 2019 | 회귀 UQ · 구간 · 보정 |
+
+---
+
+## paper_pdfs/ 전체 (기존 39 + 회귀 추가 18)
 
 ### 발표 핵심 (PPT 버튼 연결)
 
@@ -36,25 +51,30 @@
 ### 01 Foundations
 
 - Bartley2019, Muckley2023, Pfister2024, Teckentrup2024, Tsai2024
+- **회귀 추가:** King2006, Balestriero2021, Shen2024 Engression, Dong2024 Progression
 
 ### 02 OOD
 
 - Ahuja2022, Arjovsky2019, Arjovsky2021, Gulrajani2020, Liu2023  
 - Nagarajan2024, Wu2025, Ye2021, Ye2022, Yu2024, Yuan2022
+- **회귀 추가:** Sugiyama2007, Rothenhausler2021 Anchor Regression
 
 ### 03 Neural Extrapolation
 
 - Bay2024, Bonnasse-Gahot2022, Decugis2024, Fesser2023, Hay2024  
 - Liu2022, Martius2016, Netanyahu2023, Raissi2019, Runje2023  
 - Trask2018, Webb2023, Xu2021, Zhu2022
+- **회귀 추가:** Sahoo2018 EQL÷, Rahaman2019, Brunton2016 SINDy, Li2021 FNO
 
 ### 04 Battery
 
 - Aykol2021, Fernandez2021, Laufer2022, Li2023, Magrini2024, Xue2025
+- **회귀 추가:** Severson2019, Attia2021, AriasChao2021 N-CMAPSS
 
 ### 05 UQ
 
 - Ghahramani2013, Wang2024
+- **회귀 추가:** Gal2016, Lakshminarayanan2017, Kendall2017, Kuleshov2018, Romano2019 CQR
 
 ### 학습노트
 
@@ -70,4 +90,4 @@
 
 ---
 
-*정리일: 2026-08-13 · 권장: 외삽_문헌조사_통합.pptx*
+*정리일: 2026-08-17 · 회귀 추가 18편 · 권장: 외삽_문헌조사_통합.pptx · 회귀_외삽_추가문헌.md*

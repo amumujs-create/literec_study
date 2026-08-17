@@ -8,6 +8,7 @@
 - **통합 PPT (권장):** `extrapolation-papers/외삽_문헌조사_통합.pptx` (v4+v5+v6+사례, 125장)
 - 논문 PDF: `extrapolation-papers/paper_pdfs/`
 - 목록: `extrapolation-papers/INDEX.md`
+- 회귀 추가 문헌 (01→05 순서): `extrapolation-papers/회귀_외삽_추가문헌.md`
 - 추가 후보 논문: `papers_to_add/`
 
 재생성: `python3 extrapolation-papers/build_unified_literature_ppt.py`

@@ -19,6 +19,7 @@
 | `외삽_50분_사례_CA-CSS_v4_부록.pptx` | N-CMAPSS / CA-CSS 사례 |
 | **`paper_pdfs/`** | **전체 PDF 모음** (여기만 열어봐도 됨) |
 | **`INDEX.md`** | 목록·분류 한눈에 |
+| **`회귀_외삽_추가문헌.md`** | 01→05 순서 · **회귀** 쪽으로 이은 추가 18편 |
 | `열기.command` | 더블클릭 → PPT + paper_pdfs + INDEX 열기 |
 | `외삽_완전정복_학습노트.pdf` | 복습 노트 |
 | `_assets/paper_figs/` | 논문 Figure 크롭 |
@@ -60,6 +61,10 @@ extrapolation-papers/
 | Bartley2019_Characterizing_Extrapolation_Multivariate.pdf | Bartley et al. | 2019 | https://arxiv.org/abs/1906.07036 |
 | Muckley2023_Interpretable_Models_Extrapolation_SciML.pdf | Muckley et al. | 2023 | https://arxiv.org/abs/2212.10283 |
 | Tsai2024_Trend_Extrapolation_Methods_Review.pdf | Tsai et al. | 2024 | https://arxiv.org/abs/2401.02549 |
+| King2006_Dangers_Extreme_Counterfactuals.pdf | King & Zeng | 2006 | https://gking.harvard.edu/files/counterft.pdf |
+| Balestriero2021_Learning_High_Dimension_Extrapolation.pdf | Balestriero et al. | 2021 | https://arxiv.org/abs/2110.09485 |
+| Shen2024_Engression_Distributional_Regression.pdf | Shen & Meinshausen | 2024 | https://arxiv.org/abs/2307.00835 |
+| Dong2024_Progression_Extrapolation_Regression.pdf | Dong & Ma | 2024 | https://arxiv.org/abs/2410.23246 |
 
 ---
 
@@ -77,6 +82,8 @@ extrapolation-papers/
 | Wu2025_OOD_Time_Series_Survey.pdf | Wu et al. | 2025 | https://arxiv.org/abs/2503.13868 |
 | Ahuja2022_Invariance_IB_OOD.pdf | Ahuja et al. | 2022 | https://arxiv.org/abs/2106.06607 |
 | Yuan2022_OOD_Mechanics.pdf | Yuan et al. | 2022 | https://arxiv.org/abs/2206.14917 |
+| Sugiyama2007_Direct_Importance_Estimation.pdf | Sugiyama et al. | 2007 | NeurIPS 2007 |
+| Rothenhausler2021_Anchor_Regression.pdf | Rothenhäusler et al. | 2021 | https://arxiv.org/abs/1801.06229 |
 
 ---
 
@@ -97,6 +104,10 @@ extrapolation-papers/
 | Fesser2023_Extrapolation_Failures_PINNs.pdf | Fesser et al. | 2023 | https://arxiv.org/abs/2306.09478 |
 | Zhu2022_Reliable_Extrapolation_DeepONet.pdf | Zhu et al. | 2022 | https://arxiv.org/abs/2212.06347 |
 | Hay2024_Function_Extrapolation_Manifolds.pdf | Hay & Sharon | 2024 | https://arxiv.org/abs/2405.10563 |
+| Sahoo2018_Learning_Equations_Extrapolation_Control.pdf | Sahoo, Lampert, Martius | 2018 | https://arxiv.org/abs/1806.07259 |
+| Rahaman2019_Spectral_Bias_Neural_Networks.pdf | Rahaman et al. | 2019 | https://arxiv.org/abs/1806.08734 |
+| Brunton2016_SINDy_Discovering_Governing_Equations.pdf | Brunton, Proctor, Kutz | 2016 | https://arxiv.org/abs/1509.03580 |
+| Li2021_Fourier_Neural_Operator.pdf | Li et al. | 2021 | https://arxiv.org/abs/2010.08895 |
 
 ---
 
@@ -110,6 +121,9 @@ extrapolation-papers/
 | Aykol2021_Physics_ML_Battery_Lifetime.pdf | Aykol et al. | 2021 | https://doi.org/10.1149/1945-7111/ABEC55 |
 | Magrini2024_Review_Degradation_RUL_LiIon.pdf | Magrini et al. | 2024 | https://doi.org/10.3390/s24113382 |
 | Laufer2022_ML_Lifetime_Prediction_LiIon.pdf | Laufer et al. | 2022 | https://doi.org/10.1002/advs.202200630 |
+| Severson2019_Battery_Cycle_Life_Prediction.pdf | Severson et al. | 2019 | https://doi.org/10.1038/s41560-019-0356-8 |
+| Attia2021_Statistical_Learning_Battery_Lifetime.pdf | Attia, Severson, Witmer | 2021 | https://arxiv.org/abs/2101.01885 |
+| AriasChao2021_N-CMAPSS_Dataset.pdf | Arias Chao et al. | 2021 | https://doi.org/10.3390/data6010005 |
 
 ---
 
@@ -119,7 +133,14 @@ extrapolation-papers/
 |--------|------|------|----------|
 | Ghahramani2013_Bayesian_Nonparametrics.pdf | Ghahramani | 2013 | https://doi.org/10.1098/rsta.2011.0553 |
 | Wang2024_Extrapolation_Driven_PINN_Architecture.pdf | Wang et al. | 2024 | https://arxiv.org/abs/2406.12460 |
+| Gal2016_Dropout_Bayesian_Approximation.pdf | Gal & Ghahramani | 2016 | https://arxiv.org/abs/1506.02142 |
+| Lakshminarayanan2017_Deep_Ensembles.pdf | Lakshminarayanan et al. | 2017 | https://arxiv.org/abs/1612.01474 |
+| Kendall2017_What_Uncertainties_Do_We_Need.pdf | Kendall & Gal | 2017 | https://arxiv.org/abs/1703.04977 |
+| Kuleshov2018_Accurate_Uncertainties_Deep_Learning.pdf | Kuleshov et al. | 2018 | https://arxiv.org/abs/1807.00263 |
+| Romano2019_Conformalized_Quantile_Regression.pdf | Romano, Patterson, Candès | 2019 | https://arxiv.org/abs/1905.03222 |
+
+회귀 쪽으로 이은 이유·읽는 순서: [`회귀_외삽_추가문헌.md`](회귀_외삽_추가문헌.md)
 
 ---
 
-*총 36편 | 수집일: 2026-07-02*
+*총 36편 + 회귀 추가 18편 | 추가 수집일: 2026-08-17*
