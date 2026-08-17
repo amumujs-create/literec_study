@@ -9,5 +9,6 @@
 - 논문 PDF: `extrapolation-papers/paper_pdfs/`
 - 목록: `extrapolation-papers/INDEX.md`
 - 추가 후보 논문: `papers_to_add/`
+- **RUL 외삽 4유형:** `extrapolation-papers/06_rul_extrapolation/` (조사 본문: ca-css-ncmapss `docs/RUL_EXTRAPOLATION_SURVEY.md`)
 
 재생성: `python3 extrapolation-papers/build_unified_literature_ppt.py`
