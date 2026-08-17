@@ -12,6 +12,7 @@
 | **`paper_pdfs/`** | PPT 버튼 + 전부 모아둔 PDF (**여기만 열어도 됨**) |
 | `외삽_완전정복_학습노트.pdf` | 복습 노트 |
 | `01_`~`05_/` | 주제별 원본 분류 |
+| **`06_rul_extrapolation/`** | **RUL 외삽 4유형 + 추가 수집 목록 (2026-08-17)** |
 
 ---
 
@@ -70,4 +71,12 @@
 
 ---
 
-*정리일: 2026-08-13 · 권장: 외삽_문헌조사_통합.pptx*
+### 06 RUL 외삽 (신규 분류, PDF는 수집 대기)
+
+- 조사 본문: 연구 레포 `ca-css-ncmapss/docs/RUL_EXTRAPOLATION_SURVEY.md`
+- 목록: [`06_rul_extrapolation/README.md`](06_rul_extrapolation/README.md)
+- 유형: A 도메인 이동 · B 조기예측 · C 물리 제약 · D typed 기하 (우리 Hard)
+
+---
+
+*정리일: 2026-08-17 · 권장: 외삽_문헌조사_통합.pptx · RUL은 06_*

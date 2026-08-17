@@ -46,8 +46,12 @@ extrapolation-papers/
 ├── 03_neural_network_extrapolation/ # 딥러닝/신경망 외삽 방법론
 ├── 04_battery_engineering/          # 배터리·공학 응용 (RUL 예측)
 ├── 05_uncertainty_quantification/   # 불확실성 정량화 + Bayesian 접근
+├── 06_rul_extrapolation/            # RUL 전용 외삽 4유형 (조사 2026-08-17)
 └── _assets/                         # v3 발표용 그림
 ```
+
+RUL만 볼 때: [`06_rul_extrapolation/README.md`](06_rul_extrapolation/README.md)  
+연구 포지셔닝 본문: `ca-css-ncmapss/docs/RUL_EXTRAPOLATION_SURVEY.md`
 
 ---
 

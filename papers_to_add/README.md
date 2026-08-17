@@ -47,4 +47,22 @@ v3 발표자료 보강 (2026-07-13) + **v4 해법 논문** (2026-07-16).
 
 ---
 
+## 07_rul_extrapolation (2026-08-17 조사)
+
+일반 외삽 카드(01–06)와 별개. **RUL에서 밖이 네 갈래**라는 분류용.  
+본문: `ca-css-ncmapss/docs/RUL_EXTRAPOLATION_SURVEY.md` · 목록: [`../extrapolation-papers/06_rul_extrapolation/README.md`](../extrapolation-papers/06_rul_extrapolation/README.md)
+
+| 파일 | 저자 | 연도 | 링크 | 유형 | 상태 |
+|------|------|------|------|------|------|
+| Costa2023_DA_Operation_Profile_RUL.pdf | Costa et al. | 2023 | https://doi.org/10.1016/j.ress.2023.109718 | A 운용위상 DA | ❌ 수집 대기 |
+| Severson2019_Battery_Cycle_Life_Early.pdf | Severson et al. | 2019 | https://doi.org/10.1038/s41560-019-0356-8 | B 조기예측 원전 | ❌ 수집 대기 |
+| EviAdapt2025_Evidential_DA_Incomplete_RUL.pdf | EviAdapt | 2025 | https://doi.org/10.1109/tim.2025.3551977 | A+B 불완전열화 | ❌ 수집 대기 (실험은 함) |
+| CruiseBench2026_NCMAPSS_Cruise_Benchmark.pdf | CruiseBench | 2026 | https://arxiv.org/abs/2607.19380 | D 인접 벤치 | ❌ 수집 대기 |
+| TurbofanDA2025_Review.pdf | — | 2025 | https://arxiv.org/abs/2510.03604 | A 서베이 | ❌ 수집 대기 |
+| CURA2025_SourceFree_RUL.pdf | CURA | 2025 | MSSP / github.com/keyplay/CURA | A source-free | ❌ 수집 대기 |
+| Chen2025_DTL_Machinery_RUL_Review.pdf | Chen et al. | 2025 | https://doi.org/10.1088/1361-6501/ad8940 | A 리뷰 | ❌ 수집 대기 |
+| BatteryGPT2025_Early_Degradation.pdf | BatteryGPT | 2025 | https://doi.org/10.1038/s41467-025-66819-0 | B | ❌ 수집 대기 |
+| PhyResBiLSTM2025.pdf | PhyRes-BiLSTM | 2025 | https://doi.org/10.1109/ieeeconf65522.2025.11137054 | C 단조 PINN | ❌ 수집 대기 |
+| PHME_ConstraintGuided_RUL.pdf | PHME | — | https://papers.phmsociety.org/index.php/phme/article/download/4897/2946 | C CGGD | ❌ 수집 대기 |
+
 관련 outline: [`../ppt_v3/outline_v4.md`](../ppt_v3/outline_v4.md)
