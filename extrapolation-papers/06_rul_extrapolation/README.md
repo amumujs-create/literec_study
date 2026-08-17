@@ -14,6 +14,9 @@
 | **C. 물리 제약** | 반사실 방향·단조 | PINN, CMNN, PhyRes, CGGD | H1 / TRA 공동 지표 |
 | **D. typed 기하** | hull · TRA quantile · unit×regime | Pfister, Bartley + **우리 Hard** | **본편** |
 
+**본편 인사이트:** `데이터 → TabPFN → RUL` vs `데이터 + 구조 prior → 모델 → RUL`.  
+hard(범위가 갈라진 시험)에서 foundation 사전학습만으로는 부족하고, 문제에 맞는 구조 prior가 추가 이득. 평균보다 최악 시드. C-MAPSS SOTA로 확장 금지.
+
 ---
 
 ## 추가 수집 대상 (아직 PDF 없음)
